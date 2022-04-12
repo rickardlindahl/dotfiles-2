@@ -1,0 +1,136 @@
+# i3 config file (v4)
+
+# God-key is Windows key
+set $mod Mod4
+
+# --- General settings --- #
+exec_always xsetroot -solid "#000"
+exec_always synclient TapButton 1=0
+exec_always synclient TapButton 2=0
+exec_always synclient TapButton 3=0
+exec synclient TapButton1=0 TapButton2=0 TapButton3=0
+
+new_window 1pixel
+font pango:DejaVu Sans Mono 18
+
+# Use rofi, not dmenu
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id "rofi -show drun"
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q kill
+
+# --- Execs --- #
+bindsym $mod+l exec i3lock -t -i ~/.config/i3/wallpapers/the-valley-minimal-4k.png
+bindsym $mod+Return exec alacritty 
+bindsym Print exec scrot '/home/rickard/Screenshots/%Y-%m-%d_%H-%M-%S_scrot.png'
+bindsym $mod+Print exec scrot -u '/home/rickard/Screenshots/%Y-%m-%d_%H-%M-%S_scrot.png'
+bindsym --release $mod+Ctrl+c exec scrot --select '/home/rickard/Screenshots/%Y-%m-%d_%H-%M-%S_$wx$h_scrot.png'
+
+# Bluetooth
+exec blueman-applet
+exec --no-startup-id nm-applet
+
+# Audio (both amixer and pavu for headset and speakers)
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute && pactl set-sink-volume bluez_sink.04_5D_4B_80_C2_D0 +2%
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute && pactl set-sink-volume bluez_sink.04_5D_4B_80_C2_D0 -2%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle 
+exec pasystray
+
+# Media player controls
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+
+# Brightness 
+# increase screen brightness
+bindsym XF86MonBrightnessUp exec light -A 5
+# decrease screen brightnessBrightness
+bindsym XF86MonBrightnessDown exec light -U 5
+
+
+# --- System bar --- #
+bar {
+    status_command i3blocks -c ~/.config/i3blocks/config
+    tray_output primary
+    position top
+    font pango:monospace 14 
+}
+
+# --- Modes --- #
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Floating
+bindsym $mod+Shift+space floating toggle
+floating_modifier $mod
+
+# Resizing
+mode "resize" {
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Down resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# --- Movement, navigation, etc ---#
+# Focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move workspace to left or right screen
+bindsym $mod+Control+Shift+Left move workspace to output left
+bindsym $mod+Control+Shift+Right move workspace to output right
+
+# Splitting
+bindsym $mod+b split h
+bindsym $mod+v split v
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Toggle focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# --- Workspaces ---#
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Notification handler
+exec_always --no-startup-id dunst
+
