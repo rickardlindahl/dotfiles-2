@@ -1,0 +1,79 @@
+# i3blocks config file
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=~/.config/i3blocks/i3blocks-contrib/$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[mediaplayer]
+instance=spotify
+label=
+interval=5
+signal=10
+
+[bt_headset_mode]
+command=bluetoothcard=bluez_card.00_1B_66_80_C9_95 ~/.config/i3blocks/i55blocks/bluetooth-headset-mode/bt_headset_mode
+markup=pango
+interval=10
+
+# Volume indicator
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+
+[volume]
+label=
+#label=VOL
+interval=once
+signal=10
+#STEP=5%
+
+# Network interface monitoring
+#
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+[iface]
+#IFACE=wlan0
+#instance=wlp0s20f3
+label=
+color=#00FF00
+interval=10
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+[memory]
+#label=MEM
+label=
+instance=mem
+interval=10
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+#label=CPU
+label=
+interval=10
+min_width= 100.00%
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[battery2]
+#label=⚡
+interval=30
+markup=pango
+
+# Date Time
+#
+[time]
+label=
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=5
+
