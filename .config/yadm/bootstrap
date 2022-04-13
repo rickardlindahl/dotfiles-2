@@ -22,10 +22,6 @@ install_apt_packages() {
         "vim"
         "cmake"
         "pkg-config"
-        "libfreetype6-dev"
-        "libfontconfig1-dev"
-        "libxcb-xfixes0-dev"
-        "libxkbcommon-dev"
         "python3"
         "scrot"
         "arandr"
@@ -35,18 +31,7 @@ install_apt_packages() {
         "rofi"
         "fonts-firacode"
         "apt-transport-https"
-
-        #(i3status dependencies)
         "autoconf"
-        "libconfuse-dev"
-        "libyajl-dev"
-        "libasound2-dev"
-        "libiw-dev"
-        "asciidoc"
-        "libpulse-dev"
-        "libnl-genl-3-dev"
-        "meson"
-
         # playerctl is needed for i55blocks mediaplayer
         "playerctl"
     )
@@ -73,7 +58,6 @@ install_fish() {
 install_rush_and_cargo() {
     curl https://sh.rustup.rs -sSf | sh
 
-    # Install cargo stuff:
     packages=(
         "alacritty"
         "bat"
@@ -95,31 +79,14 @@ install_python_packages() {
     packages=(
         "pulsectl"
     )
+
     for package in "${packages[@]}"; do
         pip3 install -U $package
     done
 }
 
-install_i3status() {
-    git clone git@github.com:i3/i3status.git ~/dev/i3status
-    cd ~/dev/i3status
-    mkdir build
-    cd build
-    meson ..
-    ninja
-    sudo ninja install
-}
-
 install_nvm() {
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-}
-
-install_vscode() {
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
-    sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-    rm -f packages.microsoft.gpg
-    sudo apt update && sudo apt install -y code
 }
 
 create_directories
@@ -128,6 +95,5 @@ install_fish
 install_rush_and_cargo
 install_starship
 install_python_packages
-install_i3status
 install_nvm
-install_vscode
+
