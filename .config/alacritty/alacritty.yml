@@ -31,15 +31,15 @@ scrolling:
 # Font configurations
 font:
   normal:
-    family: FiraCode Nerd Font
+    family: Fira Code
     style: Regular
 
   bold:
-    family: FiraCode Nerd Font
+    family: Fira Code
     style: Bold
 
   italic:
-    family: FiraCode Nerd Font
+    family: Fira Code
     style: Italic
 
   size: 12.0
