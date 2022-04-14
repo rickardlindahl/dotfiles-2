@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source ./apt_install.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+. $SCRIPT_DIR/apt-install.sh
 
 install_i3xrocks_packages() {
     packages=(

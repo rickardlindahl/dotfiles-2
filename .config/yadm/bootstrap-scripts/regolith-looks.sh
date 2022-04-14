@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source ./apt-install.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+. $SCRIPT_DIR/apt-install.sh
 
 LOOK_PACKAGE_NAME=regolith-look-nord
 LOOK_NAME=nord

@@ -4,6 +4,8 @@
 . ./bootstrap-scripts/fish.sh
 . ./bootstrap-scripts/i3xrocks.sh
 . ./bootstrap-scripts/nvm.sh
-. ./bootstrap-scripts/regolith-looks.sh
 . ./bootstrap-scripts/rust.sh
 . ./bootstrap-scripts/starship.sh
+
+# Run regolith-looks last as the UI will flash
+. ./bootstrap-scripts/regolith-looks.sh

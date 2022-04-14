@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 
-add_ppa() {
-    PPA=$1 # e.g. PPA="ondrej/apache2"
+is_ppa_added() {
+    PPA=$1
 
-    if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-        echo "Adding ppa:$PPA"
-        sudo apt-add-repository ppa:$PPA 
+    if grep -q "^deb .*$PPA" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+        echo 1
     else
-        echo "ppa:$PPA already added"
+        echo 0
+    fi
+}
+
+add_ppa() {
+    PPA=$1
+
+    if [ $(is_ppa_added $PPA) -eq 0 ]; then
+        echo "Adding ppa:$PPA"
+        sudo apt-add-repository ppa:$PPA
+    else
+        echo "ppa:$PPA is already added"
     fi
 }

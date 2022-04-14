@@ -4,4 +4,8 @@ install_nvm() {
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 }
 
-install_nvm
+if [ -z ${NVM_DIR+x} ]; then
+    install_nvm
+else
+    echo "nvm is already installed"
+fi

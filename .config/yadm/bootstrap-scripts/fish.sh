@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
-. ./add-ppa.sh
-. ./apt-install.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+. $SCRIPT_DIR/add-ppa.sh
+. $SCRIPT_DIR/apt-install.sh
+
+PPA=fish-shell/release-3
 
 install_fish() {
-    add_ppa fish-shell/release-3
+    add_ppa $PPA
     sudo apt update && apt_install fish
 }
 
@@ -20,6 +24,11 @@ change_shell() {
     fi
 }
 
-install_fish
-install_fisher
-change_shell
+if [ $(is_ppa_added $PPA) -eq 0 ]; then
+    install_fish
+    install_fisher
+    change_shell
+else
+    echo "Fish is already installed"
+fi
+
