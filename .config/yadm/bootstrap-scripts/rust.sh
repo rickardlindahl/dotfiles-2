@@ -34,6 +34,11 @@ install_cargo_packages() {
     done
 }
 
+set_alacritty_as_default_terminal() {
+    sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(which alacritty) 50
+    sudo update-alternatives --config x-terminal-emulator
+}
+
 if [[ $(command -v rustup >/dev/null 2>&1) -ne 0 ]]; then
     install_rust
 else
@@ -42,5 +47,4 @@ fi
 
 install_requirements
 install_cargo_packages
-
-
+set_alacritty_as_default_terminal
