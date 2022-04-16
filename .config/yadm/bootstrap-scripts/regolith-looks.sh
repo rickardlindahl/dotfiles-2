@@ -11,6 +11,7 @@ install_preferred_look() {
 }
 
 set_look() {
+    echo "Activating $LOOK_PACKAGE_NAME"
     regolith-look set $LOOK_NAME
     regolith-look refresh
 }

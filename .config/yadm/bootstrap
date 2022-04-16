@@ -6,6 +6,7 @@
 . ./bootstrap-scripts/nvm.sh
 . ./bootstrap-scripts/rust.sh
 . ./bootstrap-scripts/starship.sh
+. ./bootstrap-scripts/gsettings.sh
 
 # Run regolith-looks last as the UI will flash
 . ./bootstrap-scripts/regolith-looks.sh
