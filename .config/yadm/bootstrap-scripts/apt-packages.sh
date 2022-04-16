@@ -22,6 +22,8 @@ install_apt_packages() {
         "fonts-firacode"
         "apt-transport-https"
         "autoconf"
+        "ranger"
+        "i3lock"
     )
 
     for package in "${packages[@]}"; do
