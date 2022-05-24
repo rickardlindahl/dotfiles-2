@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo nmcli dev wifi connect Lindahl
+sudo nmcli dev wifi connect Lindahl --ask
